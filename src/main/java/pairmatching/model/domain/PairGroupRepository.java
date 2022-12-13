@@ -9,6 +9,14 @@ import java.util.stream.Collectors;
 public class PairGroupRepository {
     private static final Set<PairGroup> pairGroups = new HashSet<>();
 
+    public static Set<PairGroup> pairGroups() {
+        return Collections.unmodifiableSet(pairGroups);
+    }
+
+    public static void add(PairGroup pairGroup) {
+        pairGroups.add(pairGroup);
+    }
+
     public static PairGroup findByStep(Step findStep) {
         return pairGroups.stream()
                 .filter(pairGroup -> pairGroup.hasSameStep(findStep))
@@ -20,10 +28,6 @@ public class PairGroupRepository {
         return pairGroups.stream()
                 .filter(pairGroup -> pairGroup.hasSameCourseLevel(course, level))
                 .collect(Collectors.toList());
-    }
-
-    public static Set<PairGroup> pairGroups() {
-        return Collections.unmodifiableSet(pairGroups);
     }
 
     public static void deleteAll() {

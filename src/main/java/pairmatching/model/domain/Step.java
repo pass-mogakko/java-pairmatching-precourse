@@ -53,4 +53,13 @@ public class Step {
     public int hashCode() {
         return Objects.hash(course, level, mission);
     }
+
+    @Override
+    public String toString() {
+        return "Step{" +
+                "course=" + course +
+                ", level=" + level +
+                ", mission='" + mission + '\'' +
+                '}';
+    }
 }

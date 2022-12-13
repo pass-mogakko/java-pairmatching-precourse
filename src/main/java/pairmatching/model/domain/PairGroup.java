@@ -24,4 +24,12 @@ public class PairGroup {
         return pairs.stream()
                 .anyMatch(pair -> pair.containsCrews(crew1, crew2));
     }
+
+    @Override
+    public String toString() {
+        return "PairGroup{" +
+                "step=" + step +
+                ", pairs=" + pairs +
+                '}';
+    }
 }

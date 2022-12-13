@@ -17,4 +17,11 @@ public class Pair {
     public List<Crew> getMatchedCrews() {
         return Collections.unmodifiableList(matchedCrews);
     }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "matchedCrews=" + matchedCrews +
+                '}';
+    }
 }
