@@ -2,7 +2,9 @@ package pairmatching.model.domain;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class PairGroupRepository {
     private static final Set<PairGroup> pairGroups = new HashSet<>();
@@ -14,11 +16,10 @@ public class PairGroupRepository {
                 .orElse(null);
     }
 
-    public static PairGroup findByCourseLevel(Course course, Level level) {
+    public static List<PairGroup> findByCourseLevel(Course course, Level level) {
         return pairGroups.stream()
                 .filter(pairGroup -> pairGroup.hasSameCourseLevel(course, level))
-                .findFirst()
-                .orElse(null);
+                .collect(Collectors.toList());
     }
 
     public static Set<PairGroup> pairGroups() {

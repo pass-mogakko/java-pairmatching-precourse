@@ -23,7 +23,6 @@ public class PairService {
 
     public void match(Step step, List<Crew> crews) {
         PairMatcher pairMatcher = new PairMatcher(step, crews);
-        PairGroup pairGroup = PairGroupRepository.findByCourseLevel(step.getCourse(), step.getLevel());
     }
 
     public void reset() {

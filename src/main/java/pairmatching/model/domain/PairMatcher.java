@@ -10,7 +10,7 @@ import pairmatching.model.constants.ErrorMessage;
 public class PairMatcher {
     private final Step step;
     private final Queue<Crew> crewsToMatch;
-    private final PairGroup sameCourseLevelPairs;
+    private final List<PairGroup> sameCourseLevelPairs;
 
     public PairMatcher(Step step, List<Crew> crews) {
         if (crews.size() < 2) {
@@ -41,11 +41,16 @@ public class PairMatcher {
     private List<Crew> matchCrew() {
         Crew crew1 = crewsToMatch.poll();
         Crew crew2 = crewsToMatch.peek();
-        if (sameCourseLevelPairs.hasAlreadyMatched(crew1, crew2)) {
+        if (areMatchedCrews(crew1, crew2)) {
             crewsToMatch.add(crew1);
         }
         crew2 = crewsToMatch.poll();
         return List.of(crew1, crew2);
+    }
+
+    private boolean areMatchedCrews(Crew crew1, Crew crew2) {
+        return sameCourseLevelPairs.stream()
+                .anyMatch(pairGroup -> pairGroup.hasAlreadyMatched(crew1, crew2));
     }
 
     private void addLastSingleCrew(List<Pair> pairs) {
