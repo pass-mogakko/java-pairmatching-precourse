@@ -31,6 +31,13 @@ public enum Course {
         }
     }
 
+    public static Course findCourseByName(String name) {
+        return Arrays.stream(Course.values())
+                .filter(course -> course.name.equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_EXIST_COURSE));
+    }
+
     public String getName() {
         return name;
     }

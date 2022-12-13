@@ -3,6 +3,7 @@ package pairmatching.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import pairmatching.constant.Constant;
 
 public class CrewGroup {
@@ -23,4 +24,19 @@ public class CrewGroup {
         Crew crew = new Crew(course, crewName);
         crews.add(crew);
     }
+
+    public List<String> findAllBackendCrewNames() {
+        return crews.stream()
+                .filter(crew -> crew.isSameCourse(Course.BACKEND))
+                .map(Crew::getName)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> findAllFrontendCrewNames() {
+        return crews.stream()
+                .filter(crew -> crew.isSameCourse(Course.FRONTEND))
+                .map(Crew::getName)
+                .collect(Collectors.toList());
+    }
+
 }

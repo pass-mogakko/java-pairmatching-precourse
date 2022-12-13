@@ -35,6 +35,7 @@ public class PairMatchingController {
     private void pairMatching() {
         OutputView.printAllCourseLevelMission();
         List<String> courseLevelMission = Utils.exceptionHandlingRepeat(InputView::requestCourseLevelMission, OutputView::printErrorMessage);
+        pairMatchingService.pairMatching(courseLevelMission);
     }
 
     private void pairLookup() {
