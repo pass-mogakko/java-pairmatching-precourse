@@ -1,6 +1,7 @@
 package pairmatching.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import pairmatching.service.PairMatchingService;
 import pairmatching.utils.Utils;
@@ -32,9 +33,13 @@ public class PairMatchingController {
     }
 
     private void pairMatching() {
+        OutputView.printAllCourseLevelMission();
+        List<String> courseLevelMission = Utils.exceptionHandlingRepeat(InputView::requestCourseLevelMission, OutputView::printErrorMessage);
     }
+
     private void pairLookup() {
     }
+
     private void pairInit() {
     }
 }
