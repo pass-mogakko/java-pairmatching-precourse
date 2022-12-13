@@ -98,4 +98,8 @@ public class PairMatchingService {
     public boolean isExistPairMatching(List<String> courseLevelMission) {
         return pairMatchingGroup.isExistPairMatching(courseLevelMission);
     }
+
+    public void deletePairMatching(List<String> courseLevelMission) {
+        pairMatchingGroup.delete(courseLevelMission);
+    }
 }

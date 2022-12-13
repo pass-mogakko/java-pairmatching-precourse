@@ -34,11 +34,24 @@ public class PairMatchingController {
 
     private void pairMatching() {
         OutputView.printAllCourseLevelMission();
+        requestCourseLevelMission();
+    }
+
+    private void requestCourseLevelMission() {
         List<String> courseLevelMission = Utils.exceptionHandlingRepeat(InputView::requestCourseLevelMission, OutputView::printErrorMessage);
         boolean isExistPairMatching = pairMatchingService.isExistPairMatching(courseLevelMission);
         if (isExistPairMatching) {
             boolean isRestartPairMatching = Utils.exceptionHandlingRepeat(InputView::requestRestartPairMatching, OutputView::printErrorMessage);
+            if (!isRestartPairMatching) {
+                requestCourseLevelMission();
+                return;
+            }
+            pairMatchingService.deletePairMatching(courseLevelMission);
         }
+        printPairMatching(courseLevelMission);
+    }
+
+    private void printPairMatching(List<String> courseLevelMission) {
         List<List<String>> pairMatchingCrewNames = pairMatchingService.pairMatching(courseLevelMission);
         OutputView.printPairMatchingResult(pairMatchingCrewNames);
     }

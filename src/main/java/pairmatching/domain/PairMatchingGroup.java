@@ -37,7 +37,6 @@ public class PairMatchingGroup {
                 .collect(Collectors.toList());
     }
 
-
     public boolean isExistPairMatching(List<String> courseLevelMission) {
         String courseName = courseLevelMission.get(Constant.COURSE_INDEX);
         String level = courseLevelMission.get(Constant.LEVEL_INDEX);
@@ -47,5 +46,13 @@ public class PairMatchingGroup {
                 .filter(pairMatching -> pairMatching.isSameCourse(course))
                 .filter(pairMatching -> pairMatching.isSameLevel(level))
                 .anyMatch(pairMatching -> pairMatching.isSameMission(mission));
+    }
+
+    public void delete(List<String> courseLevelMission) {
+        String courseName = courseLevelMission.get(Constant.COURSE_INDEX);
+        String level = courseLevelMission.get(Constant.LEVEL_INDEX);
+        String mission = courseLevelMission.get(Constant.MISSION_INDEX);
+        Course course = Course.findCourseByName(courseName);
+        pairMatchingGroup.removeIf(pairMatching -> pairMatching.isSameCourse(course) && pairMatching.isSameLevel(level) && pairMatching.isSameMission(mission));
     }
 }

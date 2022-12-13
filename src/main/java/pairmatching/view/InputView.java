@@ -25,6 +25,7 @@ public class InputView {
     }
 
     public static List<String> requestCourseLevelMission() {
+        System.out.println();
         System.out.println(Message.REQUEST_COURSE_LEVEL_MISSION);
         System.out.println(Message.COURSE_LEVEL_MISSION_EXAMPLE);
         String courseLevelMission = Console.readLine();
