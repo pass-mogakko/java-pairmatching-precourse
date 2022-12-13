@@ -2,9 +2,13 @@ package pairmatching.controller;
 
 import pairmatching.domain.Course;
 import pairmatching.domain.CrewReader;
+import pairmatching.domain.MainCommand;
 import pairmatching.service.MainService;
+import pairmatching.view.InputView;
 
 import java.util.List;
+
+import static pairmatching.util.ExceptionHandler.handleInputException;
 
 public class MainController {
     private final MainService mainService = new MainService();
@@ -25,6 +29,7 @@ public class MainController {
     }
 
     public void run() {
+        MainCommand mainCommand = handleInputException(InputView::readMainCommand);
 
     }
 
