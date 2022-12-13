@@ -1,7 +1,7 @@
 package pairmatching.model.domain;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -34,8 +34,9 @@ public class PairMatcher {
     }
 
     private Queue<Crew> shuffle(List<Crew> crews) {
-        Collections.shuffle(crews);
-        return new LinkedList<>(crews);
+        List<Crew> crewToShuffle = new ArrayList<>(crews);
+        Randoms.shuffle(crewToShuffle);
+        return new LinkedList<>(crewToShuffle);
     }
 
     private List<Crew> matchCrew() {
