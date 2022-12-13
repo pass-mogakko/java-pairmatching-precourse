@@ -11,12 +11,7 @@ public class FrontController {
     private final PairController pairController = new PairController();
 
     public void execute() {
-        setUp();
         executeFunction();
-    }
-
-    private void setUp() {
-        crewService.importCrewResources();
     }
 
     private void executeFunction() {
