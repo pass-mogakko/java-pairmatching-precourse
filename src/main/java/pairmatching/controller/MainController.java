@@ -1,5 +1,6 @@
 package pairmatching.controller;
 
+import pairmatching.domain.Course;
 import pairmatching.domain.CrewReader;
 import pairmatching.service.MainService;
 
@@ -14,8 +15,12 @@ public class MainController {
 
     private void setUp() {
         CrewReader crewReader = new CrewReader();
-        List<List<String>> crewNames = crewReader.readAllFile();
-//        mainService.setUpCrewNames(crewNames);
+
+        List<String> backendCrews = crewReader.readFile(Course.BACKEND);
+        mainService.setUpCrewNames(Course.BACKEND, backendCrews);
+
+        List<String> frontendCrews = crewReader.readFile(Course.FRONTEND);
+        mainService.setUpCrewNames(Course.FRONTEND, frontendCrews);
 
     }
 

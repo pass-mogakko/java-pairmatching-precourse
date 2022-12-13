@@ -424,7 +424,7 @@ public class Crew {
 
 ### 파일 읽기
 - [x] markdown 파일을 한 줄씩 읽어오는 기능 구현하기
-- [ ] 파일 읽은 바를 CrewRepository 혹은 Crews 등 일급 컬렉션에 저장하기
+- [x] 파일 읽은 바를 CrewRepository 혹은 Crews 등 일급 컬렉션에 저장하기
 
 ### 프로그램 시작
 
