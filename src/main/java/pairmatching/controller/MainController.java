@@ -41,7 +41,9 @@ public class MainController {
         }
     }
 
-    public void matchPairs() {}
+    public void matchPairs() {
+        OutputView.printLevelAndMission();
+    }
 
     public void showPairs() {}
 

@@ -11,4 +11,10 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printLevelAndMission() {
+        String info = messageFactory.createLevelAndMissionInfo();
+
+        System.out.println(info);
+    }
+
 }
