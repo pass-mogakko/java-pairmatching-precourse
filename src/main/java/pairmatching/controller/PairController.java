@@ -1,8 +1,10 @@
 package pairmatching.controller;
 
+import pairmatching.view.OutputView;
+
 public class PairController {
     public void match() {
-        System.out.println("MATCH");
+        OutputView.printPairMatchScreen();
     }
 
     public void read() {
