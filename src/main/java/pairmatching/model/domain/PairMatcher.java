@@ -27,7 +27,9 @@ public class PairMatcher {
             Pair pair = new Pair(new ArrayList<>(matchCrew()));
             pairs.add(pair);
         }
-        // TODO 홀수일때
+        if (crewsToMatch.size() == 1) {
+            addLastSingleCrew(pairs);
+        }
         return new PairGroup(step, pairs);
     }
 
@@ -44,5 +46,13 @@ public class PairMatcher {
         }
         crew2 = crewsToMatch.poll();
         return List.of(crew1, crew2);
+    }
+
+    private void addLastSingleCrew(List<Pair> pairs) {
+        int lastIndex = pairs.size() - 1;
+        Pair lastPair = pairs.get(lastIndex);
+        List<Crew> newLastPair = new ArrayList<>(lastPair.getMatchedCrews());
+        newLastPair.add(crewsToMatch.poll());
+        pairs.add(lastIndex, new Pair(new ArrayList<>(newLastPair)));
     }
 }
