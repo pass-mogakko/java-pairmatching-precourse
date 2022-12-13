@@ -61,14 +61,14 @@ BUILD SUCCESSFUL in 0s
 ```
 
 ```java
-> 코드 예시
-        
-List<String> crewNames; // 파일에서 로드한 크루 이름 목록
-List<String> shuffledCrew = Randoms.shuffle(crewNames); // 섞인 크루 이름 목록
+>코드 예시
 
-// 페어 매칭 & 검증
+        List<String> crewNames; // 파일에서 로드한 크루 이름 목록
+        List<String> shuffledCrew=Randoms.shuffle(crewNames); // 섞인 크루 이름 목록
 
-...
+        // 페어 매칭 & 검증
+
+        ...
 ```
 
 - 페어 재매칭 시도
@@ -346,16 +346,16 @@ Q
 
 ```java
 public enum Course {
-  BACKEND("백엔드"),
-  FRONTEND("프론트엔드");
+    BACKEND("백엔드"),
+    FRONTEND("프론트엔드");
 
-  private String name;
+    private String name;
 
-  Course(String name) {
-    this.name = name;
-  }
+    Course(String name) {
+        this.name = name;
+    }
 
-  // 추가 기능 구현
+    // 추가 기능 구현
 }
 ```
 
@@ -363,19 +363,19 @@ public enum Course {
 
 ```java
 public enum Level {
-  LEVEL1("레벨1"),
-  LEVEL2("레벨2"),
-  LEVEL3("레벨3"),
-  LEVEL4("레벨4"),
-  LEVEL5("레벨5");
+    LEVEL1("레벨1"),
+    LEVEL2("레벨2"),
+    LEVEL3("레벨3"),
+    LEVEL4("레벨4"),
+    LEVEL5("레벨5");
 
-  private String name;
+    private String name;
 
-  Level(String name) {
-    this.name = name;
-  }
+    Level(String name) {
+        this.name = name;
+    }
 
-  // 추가 기능 구현
+    // 추가 기능 구현
 }
 ```
 
@@ -383,6 +383,7 @@ public enum Level {
 
 ```java
 public class Crew {
+
     private Course course;
     private String name;
 }
