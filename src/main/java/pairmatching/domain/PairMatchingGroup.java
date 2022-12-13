@@ -55,4 +55,17 @@ public class PairMatchingGroup {
         Course course = Course.findCourseByName(courseName);
         pairMatchingGroup.removeIf(pairMatching -> pairMatching.isSameCourse(course) && pairMatching.isSameLevel(level) && pairMatching.isSameMission(mission));
     }
+
+    public List<List<String>> findPairMatching(List<String> courseLevelMission) {
+        String courseName = courseLevelMission.get(Constant.COURSE_INDEX);
+        String level = courseLevelMission.get(Constant.LEVEL_INDEX);
+        String mission = courseLevelMission.get(Constant.MISSION_INDEX);
+        Course course = Course.findCourseByName(courseName);
+        return pairMatchingGroup.stream()
+                .filter(pairMatching -> pairMatching.isSameCourse(course))
+                .filter(pairMatching -> pairMatching.isSameLevel(level))
+                .filter(pairMatching -> pairMatching.isSameMission(mission))
+                .map(PairMatching::getCrews)
+                .collect(Collectors.toList());
+    }
 }

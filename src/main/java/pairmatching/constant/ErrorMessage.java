@@ -7,4 +7,5 @@ public class ErrorMessage {
     public static final String NOT_EXIST_COURSE = "존재하지 않는 과정입니다.";
     public static final String NOT_EXIST_LEVEL = "존재하지 않는 레벨입니다.";
     public static final String NOT_EXIST_MISSION = "해당 레벨에 존재하지 않는 미션입니다.";
+    public static final String NOT_EXIST_PAIR_MATCHING = "매칭 이력이 없습니다.";
 }

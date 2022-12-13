@@ -102,4 +102,8 @@ public class PairMatchingService {
     public void deletePairMatching(List<String> courseLevelMission) {
         pairMatchingGroup.delete(courseLevelMission);
     }
+
+    public List<List<String>> findPairMatching(List<String> courseLevelMission) {
+        return pairMatchingGroup.findPairMatching(courseLevelMission);
+    }
 }
