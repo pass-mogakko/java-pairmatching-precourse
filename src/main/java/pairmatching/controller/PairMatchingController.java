@@ -69,5 +69,7 @@ public class PairMatchingController {
     }
 
     private void pairInit() {
+        pairMatchingService.pairInit();
+        OutputView.printPairInit();
     }
 }

@@ -39,4 +39,8 @@ public class OutputView {
         String pairMatching = String.join(Message.PAIR_MATCHING_JOIN_REGEX, pairMatchingCrewNames);
         System.out.println(pairMatching);
     }
+
+    public static void printPairInit() {
+        System.out.println(Message.PAIR_INIT);
+    }
 }

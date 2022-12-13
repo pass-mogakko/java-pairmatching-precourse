@@ -33,23 +33,23 @@
         - [x] 미션이 해당하는 레벨의 미션이 아닌경우
     - [x] 페어 메칭 결과 출력하기
         - [x] 매칭 이력이 없으면 에러메시지 출력
-- [ ] 페어 초기화
-- [ ] 프로그램 종료
+- [x] 페어 초기화
+- [x] 프로그램 종료
 
 ## 프로그래밍 요구사항
 
-- [ ] 자바 11버전 확인
-- [ ] 모든 과제 테스트 통과
-- [ ] 예외상황에서는 [ERROR]로 시작하는 예외메시지 출력후 해당 부분부터 다시 입력받기
-- [ ] 예제와 동일한 입출력하기
-- [ ] 들여쓰기의 최대 깊이 2
-- [ ] 3항 연산자 사용 x
-- [ ] 함수의 최대 크기는 15
-- [ ] else 예약어 사용 x
-- [ ] build.gradle 변경 x, 외부라이브러리 사용 x(하지만 11버전으로 변경만 할꺼임)
-- [ ] 프로그램 종료시 System.exit() 호출 x
+- [x] 자바 11버전 확인
+- [x] 모든 과제 테스트 통과
+- [x] 예외상황에서는 [ERROR]로 시작하는 예외메시지 출력후 해당 부분부터 다시 입력받기
+- [x] 예제와 동일한 입출력하기
+- [x] 들여쓰기의 최대 깊이 2
+- [x] 3항 연산자 사용 x
+- [x] 함수의 최대 크기는 15
+- [x] else 예약어 사용 x
+- [x] build.gradle 변경 x, 외부라이브러리 사용 x(하지만 11버전으로 변경만 할꺼임)
+- [x] 프로그램 종료시 System.exit() 호출 x
 
 ## 프로그래밍 요구사항 - Randoms, Console
 
-- [ ] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 shuffle()를 활용
-- [ ] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 readLine()을 활용
+- [x] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 shuffle()를 활용
+- [x] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 readLine()을 활용

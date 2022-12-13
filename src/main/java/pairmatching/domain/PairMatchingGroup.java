@@ -7,7 +7,7 @@ import pairmatching.constant.Constant;
 
 public class PairMatchingGroup {
 
-    private final List<PairMatching> pairMatchingGroup = new ArrayList<>();
+    private List<PairMatching> pairMatchingGroup = new ArrayList<>();
 
     public void backendPairMatching(List<String> crews, String level, String mission) {
         PairMatching pairMatching = new PairMatching(Course.BACKEND, level, mission, crews);
@@ -67,5 +67,9 @@ public class PairMatchingGroup {
                 .filter(pairMatching -> pairMatching.isSameMission(mission))
                 .map(PairMatching::getCrews)
                 .collect(Collectors.toList());
+    }
+
+    public void init() {
+        pairMatchingGroup = new ArrayList<>();
     }
 }

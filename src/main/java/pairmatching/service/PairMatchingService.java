@@ -106,4 +106,8 @@ public class PairMatchingService {
     public List<List<String>> findPairMatching(List<String> courseLevelMission) {
         return pairMatchingGroup.findPairMatching(courseLevelMission);
     }
+
+    public void pairInit() {
+        pairMatchingGroup.init();
+    }
 }
