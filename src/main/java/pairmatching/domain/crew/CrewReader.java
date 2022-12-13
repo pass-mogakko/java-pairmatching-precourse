@@ -1,4 +1,6 @@
-package pairmatching.domain;
+package pairmatching.domain.crew;
+
+import pairmatching.domain.woowacourse.Course;
 
 import java.io.*;
 import java.nio.file.Files;

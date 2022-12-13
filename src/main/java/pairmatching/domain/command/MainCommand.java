@@ -1,4 +1,4 @@
-package pairmatching.domain;
+package pairmatching.domain.command;
 
 import pairmatching.controller.MainController;
 
@@ -29,7 +29,7 @@ public enum MainCommand {
         return viewName;
     }
 
-    public static MainCommand getCommand(String button) {
+    public static MainCommand convert(String button) {
         return Arrays.stream(values())
                 .filter(mainCommand -> button.equals(mainCommand.button))
                 .findFirst()
