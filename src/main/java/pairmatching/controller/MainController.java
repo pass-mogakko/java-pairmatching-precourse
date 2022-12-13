@@ -1,8 +1,8 @@
 package pairmatching.controller;
 
-import pairmatching.domain.Course;
-import pairmatching.domain.CrewReader;
-import pairmatching.domain.MainCommand;
+import pairmatching.domain.woowacourse.Course;
+import pairmatching.domain.crew.CrewReader;
+import pairmatching.domain.command.MainCommand;
 import pairmatching.service.MainService;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -43,6 +43,8 @@ public class MainController {
 
     public void matchPairs() {
         OutputView.printLevelAndMission();
+        List<Object> options = handleInputException(InputView::readOptions);
+
     }
 
     public void showPairs() {}

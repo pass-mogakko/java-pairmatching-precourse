@@ -1,7 +1,7 @@
 package pairmatching.service;
 
-import pairmatching.domain.Course;
-import pairmatching.domain.Crew;
+import pairmatching.domain.woowacourse.Course;
+import pairmatching.domain.crew.Crew;
 import pairmatching.repository.CrewRepository;
 
 import java.util.List;
