@@ -45,4 +45,11 @@ public class InputView {
             throw new IllegalArgumentException(ErrorMessage.INPUT_INVALID_STEP_FORMAT);
         }
     }
+
+    public static ActionCommand readActionCommand() {
+        System.out.println(InputMessage.SELECT_ACTION);
+        String line = Console.readLine();
+        System.out.println();
+        return ActionCommand.find(line);
+    }
 }
