@@ -94,4 +94,8 @@ public class PairMatchingService {
         List<String> crews = computeCrews(shuffledCrew, crewIndex);
         pairMatchingGroup.frontendPairMatching(crews, level, mission);
     }
+
+    public boolean isExistPairMatching(List<String> courseLevelMission) {
+        return pairMatchingGroup.isExistPairMatching(courseLevelMission);
+    }
 }

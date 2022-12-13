@@ -3,6 +3,7 @@ package pairmatching.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import pairmatching.constant.Constant;
 
 public class PairMatchingGroup {
 
@@ -34,5 +35,17 @@ public class PairMatchingGroup {
                 .filter(pairMatching -> pairMatching.isSameMission(mission))
                 .map(PairMatching::getCrews)
                 .collect(Collectors.toList());
+    }
+
+
+    public boolean isExistPairMatching(List<String> courseLevelMission) {
+        String courseName = courseLevelMission.get(Constant.COURSE_INDEX);
+        String level = courseLevelMission.get(Constant.LEVEL_INDEX);
+        String mission = courseLevelMission.get(Constant.MISSION_INDEX);
+        Course course = Course.findCourseByName(courseName);
+        return pairMatchingGroup.stream()
+                .filter(pairMatching -> pairMatching.isSameCourse(course))
+                .filter(pairMatching -> pairMatching.isSameLevel(level))
+                .anyMatch(pairMatching -> pairMatching.isSameMission(mission));
     }
 }

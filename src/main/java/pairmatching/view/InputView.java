@@ -50,4 +50,14 @@ public class InputView {
         LevelAndMissions levelAndMissions = LevelAndMissions.findByLevel(level);
         levelAndMissions.validateMission(mission);
     }
+
+    public static boolean requestRestartPairMatching() {
+        System.out.println(Message.REQUEST_RESTART_PAIR_MATCHING);
+        List<String> allSelection = RestartPairMatchingSelection.findAllSelection();
+        String selections = String.join(Constant.JOIN_STRING, allSelection);
+        System.out.println(selections);
+        String input = Console.readLine();
+        RestartPairMatchingSelection.validate(input);
+        return input.equals(RestartPairMatchingSelection.YES.getSelection());
+    }
 }
