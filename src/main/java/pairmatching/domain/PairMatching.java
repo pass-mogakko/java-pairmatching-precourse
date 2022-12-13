@@ -27,4 +27,8 @@ public class PairMatching {
     public boolean isSameMission(String mission) {
         return this.mission.equals(mission);
     }
+
+    public List<String> getCrews() {
+        return crews;
+    }
 }

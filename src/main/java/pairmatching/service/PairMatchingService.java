@@ -43,24 +43,23 @@ public class PairMatchingService {
         }
     }
 
-    public void pairMatching(List<String> courseLevelMission) {
+    public List<List<String>> pairMatching(List<String> courseLevelMission) {
         String courseName = courseLevelMission.get(Constant.COURSE_INDEX);
         String level = courseLevelMission.get(Constant.LEVEL_INDEX);
         String mission = courseLevelMission.get(Constant.MISSION_INDEX);
         Course course = Course.findCourseByName(courseName);
         if (course.equals(Course.BACKEND)) {
-            backendPairMatching(level, mission);
+            return backendPairMatching(level, mission);
         }
-        if (course.equals(Course.FRONTEND)) {
-            frontendPairMatching(level, mission);
-        }
+        return frontendPairMatching(level, mission);
     }
 
-    private void backendPairMatching(String level, String mission) {
+    private List<List<String>> backendPairMatching(String level, String mission) {
         List<String> allBackendCrewNames = crewGroup.findAllBackendCrewNames();
         List<String> shuffledCrew = Randoms.shuffle(allBackendCrewNames);
         IntStream.range(0, shuffledCrew.size() / 2)
-                .forEach(crewIndex -> backendPairMatching(shuffledCrew, crewIndex, level, mission));
+                .forEach(crewIndex -> backendPairMatching(shuffledCrew, crewIndex * 2, level, mission));
+        return pairMatchingGroup.findBackendPairMatching(level, mission);
     }
 
     private void backendPairMatching(List<String> shuffledCrew, int crewIndex, String level, String mission) {
@@ -76,19 +75,19 @@ public class PairMatchingService {
     }
 
     private boolean isMustBeThreeCrew(List<String> shuffledCrew, int crewIndex) {
-        return isOddCrewNumber(shuffledCrew) && crewIndex == (shuffledCrew.size() / 2 - 1);
+        return isOddCrewNumber(shuffledCrew) && crewIndex == shuffledCrew.size() - 3;
     }
 
     private boolean isOddCrewNumber(List<String> shuffledCrew) {
         return shuffledCrew.size() % 2 == 1;
     }
 
-    private void frontendPairMatching(String level, String mission) {
+    private List<List<String>> frontendPairMatching(String level, String mission) {
         List<String> allFrontendCrewNames = crewGroup.findAllFrontendCrewNames();
         List<String> shuffledCrew = Randoms.shuffle(allFrontendCrewNames);
         IntStream.range(0, shuffledCrew.size() / 2)
-                .forEach(crewIndex -> frontendPairMatching(shuffledCrew, crewIndex, level, mission));
-
+                .forEach(crewIndex -> frontendPairMatching(shuffledCrew, crewIndex * 2, level, mission));
+        return pairMatchingGroup.findFrontendPairMatching(level, mission);
     }
 
     private void frontendPairMatching(List<String> shuffledCrew, int crewIndex, String level, String mission) {

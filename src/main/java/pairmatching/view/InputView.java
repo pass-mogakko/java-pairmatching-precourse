@@ -14,6 +14,7 @@ import pairmatching.domain.LevelAndMissions;
 public class InputView {
 
     public static String requestFunctionSelection() {
+        System.out.println();
         System.out.println(Message.REQUEST_FUNCTION_SELECTION);
         Arrays.stream(FunctionSelection.values())
                 .map(FunctionSelection::toKorean)
