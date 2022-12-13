@@ -35,4 +35,8 @@ public class PairService {
         Collections.shuffle(crews);
         return new LinkedList<>(crews);
     }
+
+    public void reset() {
+        PairGroupRepository.deleteAll();
+    }
 }

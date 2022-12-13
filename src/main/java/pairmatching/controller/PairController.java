@@ -34,6 +34,6 @@ public class PairController {
     }
 
     public void reset() {
-        System.out.println("RESET");
+        pairService.reset();
     }
 }

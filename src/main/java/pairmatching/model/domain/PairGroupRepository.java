@@ -17,4 +17,8 @@ public class PairGroupRepository {
     public static Set<PairGroup> pairGroups() {
         return Collections.unmodifiableSet(pairGroups);
     }
+
+    public static void deleteAll() {
+        pairGroups.clear();
+    }
 }
