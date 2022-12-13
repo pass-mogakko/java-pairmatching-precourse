@@ -1,8 +1,10 @@
 package pairmatching.model.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import pairmatching.model.constants.ErrorMessage;
 
 public enum Level {
     LEVEL1("레벨1", new ArrayList<>(List.of("자동차경주", "로또", "숫자야구게임"))),
@@ -19,11 +21,18 @@ public enum Level {
         this.missions = missions;
     }
 
+    public static Level findByName(String name) {
+        return Arrays.stream(values())
+                .filter(level -> Objects.equals(level.name, name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.LEVEL_NOT_FOUND));
+    }
+
     public String getName() {
         return name;
     }
 
-    public List<String> getMissions() {
-        return Collections.unmodifiableList(missions);
+    public boolean hasMission(String mission) {
+        return missions.contains(mission);
     }
 }

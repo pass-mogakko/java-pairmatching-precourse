@@ -2,6 +2,7 @@ package pairmatching.model.domain;
 
 import java.util.Arrays;
 import java.util.Objects;
+import pairmatching.model.constants.ErrorMessage;
 
 public enum Course {
     BACKEND("백엔드"),
@@ -17,7 +18,7 @@ public enum Course {
         return Arrays.stream(values())
                 .filter(course -> Objects.equals(course.name, name))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.COURSE_NOT_FOUND));
     }
 
     public String getName() {

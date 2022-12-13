@@ -31,13 +31,13 @@ public class InputView {
         return MenuCommand.find(line);
     }
 
-    public static StepDTO readStepToMatch() {
+    public static StepDTO readStep() {
         System.out.println(InputMessage.SELECT_STEP);
         String line = Console.readLine();
         System.out.println();
         validateStepFormat(line, InputFormat.PATTERN_STEP);
         String[] values = line.split(InputFormat.DELIMITER_STEP);
-        return new StepDTO(values[0], values[1], values[2]);
+        return new StepDTO(values[0].trim(), values[1].trim(), values[2].trim());
     }
 
     private static void validateStepFormat(String line, Pattern pattern) {

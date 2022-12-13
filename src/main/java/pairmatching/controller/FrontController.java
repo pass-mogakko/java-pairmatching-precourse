@@ -11,7 +11,7 @@ public class FrontController {
     private final PairController pairController = new PairController();
 
     public void execute() {
-        executeFunction();
+        ExceptionHandler.retryForIllegalArgument(this::executeFunction, OutputView::printErrorMessage);
     }
 
     private void executeFunction() {
