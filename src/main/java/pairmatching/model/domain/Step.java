@@ -21,6 +21,22 @@ public class Step {
         }
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public String getMission() {
+        return mission;
+    }
+
+    public boolean isSameCourseLevel(Course otherCourse, Level otherLevel) {
+        return course == otherCourse && level == otherLevel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

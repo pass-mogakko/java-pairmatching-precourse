@@ -15,4 +15,13 @@ public class PairGroup {
     public boolean hasSameStep(Step otherStep) {
         return Objects.equals(step, otherStep);
     }
+
+    public boolean hasSameCourseLevel(Course course, Level level) {
+        return step.isSameCourseLevel(course, level);
+    }
+
+    public boolean hasAlreadyMatched(Crew crew1, Crew crew2) {
+        return pairs.stream()
+                .anyMatch(pair -> pair.containsCrews(crew1, crew2));
+    }
 }

@@ -14,6 +14,13 @@ public class PairGroupRepository {
                 .orElse(null);
     }
 
+    public static PairGroup findByCourseLevel(Course course, Level level) {
+        return pairGroups.stream()
+                .filter(pairGroup -> pairGroup.hasSameCourseLevel(course, level))
+                .findFirst()
+                .orElse(null);
+    }
+
     public static Set<PairGroup> pairGroups() {
         return Collections.unmodifiableSet(pairGroups);
     }
