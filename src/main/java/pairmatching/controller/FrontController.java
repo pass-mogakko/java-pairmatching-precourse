@@ -11,15 +11,14 @@ public class FrontController {
     private final PairController pairController = new PairController();
 
     public void execute() {
-        ExceptionHandler.retryForIllegalArgument(this::executeFunction, OutputView::printErrorMessage);
-    }
-
-    private void executeFunction() {
         MenuCommand menuCommand = ExceptionHandler.retryForIllegalArgument(InputView::inputMenuCommand,
                 OutputView::printErrorMessage);
         if (menuCommand == MenuCommand.QUIT) {
-            return;
         }
+        ExceptionHandler.retryForIllegalArgument(() -> executeFunction(menuCommand), OutputView::printErrorMessage);
+    }
+
+    private void executeFunction(MenuCommand menuCommand) {
         HandlerAdaptor.executeFunctionByCommand(pairController, menuCommand);
     }
 }
