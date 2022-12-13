@@ -9,6 +9,14 @@ public class Crew {
         this.name = name;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Crew{" +
