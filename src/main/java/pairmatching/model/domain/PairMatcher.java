@@ -2,63 +2,93 @@ package pairmatching.model.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
+import java.util.Stack;
 import pairmatching.model.constants.ErrorMessage;
 
 public class PairMatcher {
     private final Step step;
-    private final Queue<Crew> crewsToMatch;
     private final List<PairGroup> sameCourseLevelPairs;
+    private final List<Crew> crews;
 
     public PairMatcher(Step step, List<Crew> crews) {
         if (crews.size() < 2) {
             throw new IllegalArgumentException(ErrorMessage.CREW_TO_MATCH_INSUFFICIENT);
         }
         this.step = step;
-        this.crewsToMatch = shuffle(crews);
+        this.crews = crews;
         this.sameCourseLevelPairs = PairGroupRepository.findByCourseLevel(step.getCourse(), step.getLevel());
     }
 
     public PairGroup match() {
-        List<Pair> pairs = new ArrayList<>();
-        while (crewsToMatch.size() > 2) {
-            Pair pair = new Pair(new ArrayList<>(matchCrew()));
-            pairs.add(pair);
-        }
-        if (crewsToMatch.size() == 1) {
-            addLastSingleCrew(pairs);
+        validateMatchCases();
+        int trialCount = 1;
+        List<Pair> pairs = makePairs();
+        while (pairs == null) {
+            trialCount++;
+            validateTrialCount(trialCount);
+            pairs = makePairs();
         }
         return new PairGroup(step, pairs);
     }
 
-    private Queue<Crew> shuffle(List<Crew> crews) {
-        List<Crew> crewToShuffle = new ArrayList<>(crews);
-        Randoms.shuffle(crewToShuffle);
-        return new LinkedList<>(crewToShuffle);
+    private void validateMatchCases() {
+        if (isImpossibleToMatch()) {
+            throw new IllegalArgumentException(ErrorMessage.PAIR_MATCH_IMPOSSIBLE);
+        }
     }
 
-    private List<Crew> matchCrew() {
-        Crew crew1 = crewsToMatch.poll();
-        Crew crew2 = crewsToMatch.peek();
-        if (areMatchedCrews(crew1, crew2)) {
-            crewsToMatch.add(crew1);
+    private boolean isImpossibleToMatch() {
+        return crews.stream()
+                .anyMatch(this::isCrewUnMatchable);
+    }
+
+    private boolean isCrewUnMatchable(Crew crew) {
+        return crews.stream()
+                .allMatch(secondCrew -> areMatchedCrews(crew, secondCrew));
+    }
+
+    private void validateTrialCount(int trialCount) {
+        if (trialCount == 4) {
+            throw new IllegalArgumentException(ErrorMessage.PAIR_MATCH_TRIAL_COUNT_OVER);
         }
-        crew2 = crewsToMatch.poll();
-        return List.of(crew1, crew2);
+    }
+
+    private List<Pair> makePairs() {
+        Stack<Crew> crewsToMatch = shuffle(crews);
+        List<Pair> pairs = new ArrayList<>();
+        while (crewsToMatch.size() > 2) {
+            Pair matchedPair = matchCrew(crewsToMatch.pop(), crewsToMatch.pop());
+            if (matchedPair == null) {
+                return null;
+            }
+            pairs.add(matchedPair);
+        }
+        if (crewsToMatch.size() == 1) {
+            Pair lastPair = pairs.get(pairs.size() - 1);
+            lastPair.addCrew(crewsToMatch.pop());
+        }
+        return pairs;
+    }
+
+    private Stack<Crew> shuffle(List<Crew> crews) {
+        List<Crew> shuffledCrew = Randoms.shuffle(crews);
+        Collections.reverse(shuffledCrew);
+        Stack<Crew> crewsToMatch = new Stack<>();
+        crewsToMatch.addAll(shuffledCrew);
+        return crewsToMatch;
+    }
+
+    private Pair matchCrew(Crew firstCrew, Crew secondCrew) {
+        if (areMatchedCrews(firstCrew, secondCrew)) {
+            return null;
+        }
+        return new Pair(List.of(firstCrew, secondCrew));
     }
 
     private boolean areMatchedCrews(Crew crew1, Crew crew2) {
         return sameCourseLevelPairs.stream()
                 .anyMatch(pairGroup -> pairGroup.hasAlreadyMatched(crew1, crew2));
-    }
-
-    private void addLastSingleCrew(List<Pair> pairs) {
-        int lastIndex = pairs.size() - 1;
-        Pair lastPair = pairs.get(lastIndex);
-        List<Crew> newLastPair = new ArrayList<>(lastPair.getMatchedCrews());
-        newLastPair.add(crewsToMatch.poll());
-        pairs.add(lastIndex, new Pair(new ArrayList<>(newLastPair)));
     }
 }

@@ -25,6 +25,10 @@ public class Pair {
                 .collect(Collectors.toList());
     }
 
+    public void addCrew(Crew crew) {
+        matchedCrews.add(crew);
+    }
+
     @Override
     public String toString() {
         return "Pair{" +
