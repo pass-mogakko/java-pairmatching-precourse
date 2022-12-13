@@ -44,7 +44,11 @@ public class MainController {
     public void matchPairs() {
         OutputView.printLevelAndMission();
         List<Object> options = handleInputException(InputView::readOptions);
-
+        boolean firstMatching = mainService.checkIfRecentLogExists(options);
+        if (firstMatching) {
+            mainService.matchPairs(options);
+        }
+        if (!firstMatching) {}
     }
 
     public void showPairs() {}
