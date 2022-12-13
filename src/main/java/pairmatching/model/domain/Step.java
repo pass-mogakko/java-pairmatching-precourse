@@ -1,6 +1,7 @@
 package pairmatching.model.domain;
 
 import java.util.Objects;
+import pairmatching.controller.dto.StepDTO;
 import pairmatching.model.constants.ErrorMessage;
 
 public class Step {
@@ -15,6 +16,10 @@ public class Step {
         this.mission = missionName;
     }
 
+    public static Step toStep(StepDTO stepDTO) {
+        return new Step(stepDTO.getCourse(), stepDTO.getLevel(), stepDTO.getMission());
+    }
+
     private void validateMission(String missionName) {
         if (!level.hasMission(missionName)) {
             throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_FOUND);
@@ -27,10 +32,6 @@ public class Step {
 
     public Level getLevel() {
         return level;
-    }
-
-    public String getMission() {
-        return mission;
     }
 
     public boolean isSameCourseLevel(Course otherCourse, Level otherLevel) {

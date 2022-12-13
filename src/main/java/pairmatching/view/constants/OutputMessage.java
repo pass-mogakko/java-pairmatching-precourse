@@ -11,4 +11,5 @@ public class OutputMessage {
             + "  - 레벨4: 성능개선 | 배포\n"
             + "  - 레벨5: \n"
             + "############################################";
+    public static final String PAIR_RESULT = "페어 매칭 결과입니다.";
 }

@@ -2,6 +2,7 @@ package pairmatching.model.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pair {
     private final List<Crew> matchedCrews;
@@ -16,6 +17,12 @@ public class Pair {
 
     public List<Crew> getMatchedCrews() {
         return Collections.unmodifiableList(matchedCrews);
+    }
+
+    public List<String> getAllCrewNames() {
+        return matchedCrews.stream()
+                .map(Crew::getName)
+                .collect(Collectors.toList());
     }
 
     @Override

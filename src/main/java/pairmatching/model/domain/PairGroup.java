@@ -1,5 +1,6 @@
 package pairmatching.model.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,10 @@ public class PairGroup {
     public boolean hasAlreadyMatched(Crew crew1, Crew crew2) {
         return pairs.stream()
                 .anyMatch(pair -> pair.containsCrews(crew1, crew2));
+    }
+
+    public List<Pair> getPairs() {
+        return Collections.unmodifiableList(pairs);
     }
 
     @Override

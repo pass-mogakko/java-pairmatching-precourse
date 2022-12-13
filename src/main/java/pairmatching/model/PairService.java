@@ -1,6 +1,9 @@
 package pairmatching.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import pairmatching.controller.dto.PairDTO;
+import pairmatching.controller.dto.StepDTO;
 import pairmatching.model.constants.ErrorMessage;
 import pairmatching.model.domain.Crew;
 import pairmatching.model.domain.PairGroup;
@@ -9,20 +12,23 @@ import pairmatching.model.domain.PairMatcher;
 import pairmatching.model.domain.Step;
 
 public class PairService {
-    public boolean hasMatched(Step step) {
-        return PairGroupRepository.findByStep(step) != null;
+    public boolean hasMatched(StepDTO stepDTO) {
+        return PairGroupRepository.findByStep(Step.toStep(stepDTO)) != null;
     }
 
-    public PairGroup readPairGroup(Step step) {
-        PairGroup pairGroup = PairGroupRepository.findByStep(step);
+    public List<PairDTO> readPairGroup(StepDTO stepDTO) {
+        PairGroup pairGroup = PairGroupRepository.findByStep(Step.toStep(stepDTO));
         if (pairGroup == null) {
             throw new IllegalArgumentException(ErrorMessage.PAIR_GROUP_NOT_FOUND);
         }
-        return pairGroup;
+        return pairGroup.getPairs()
+                .stream()
+                .map(pair -> new PairDTO(pair.getAllCrewNames()))
+                .collect(Collectors.toList());
     }
 
-    public void match(Step step, List<Crew> crews) {
-        PairMatcher pairMatcher = new PairMatcher(step, crews);
+    public void match(StepDTO stepDTO, List<Crew> crews) {
+        PairMatcher pairMatcher = new PairMatcher(Step.toStep(stepDTO), crews);
         PairGroup pairGroup = pairMatcher.match();
         PairGroupRepository.add(pairGroup);
     }
