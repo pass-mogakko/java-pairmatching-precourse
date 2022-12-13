@@ -431,7 +431,7 @@ public class Crew {
 - [x] `입력 UI` : 기능 종류 출력하고 Command로 입력 받기
   - [x] `exception` : 존재하지 않는 Command일 경우 예외 처리
 
-- [ ] 각 Command에 맞는 기능으로 이동하기
+- [x] 각 Command에 맞는 기능으로 이동하기
 
 ### 페어매칭하기
 

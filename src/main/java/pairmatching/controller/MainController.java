@@ -5,6 +5,7 @@ import pairmatching.domain.CrewReader;
 import pairmatching.domain.MainCommand;
 import pairmatching.service.MainService;
 import pairmatching.view.InputView;
+import pairmatching.view.OutputView;
 
 import java.util.List;
 
@@ -25,12 +26,29 @@ public class MainController {
 
         List<String> frontendCrews = crewReader.readFile(Course.FRONTEND);
         mainService.setUpCrewNames(Course.FRONTEND, frontendCrews);
-
     }
 
     public void run() {
         MainCommand mainCommand = handleInputException(InputView::readMainCommand);
+        executeByCommand(mainCommand);
+    }
 
+    private void executeByCommand(MainCommand mainCommand) {
+        try {
+            mainCommand.execute(this);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+        }
+    }
+
+    public void matchPairs() {}
+
+    public void showPairs() {}
+
+    public void resetPairs() {}
+
+    public void quit() {
+        return;
     }
 
 }
