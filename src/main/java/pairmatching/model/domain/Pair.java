@@ -1,5 +1,6 @@
 package pairmatching.model.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class Pair {
     private final List<String> matchedCrewNames;
 
     public Pair(List<String> matchedCrewNames) {
-        this.matchedCrewNames = matchedCrewNames;
+        this.matchedCrewNames = new ArrayList<>(matchedCrewNames);
     }
 
     public boolean containsCrews(String firstCrewName, String secondCrewName) {
