@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import pairmatching.controller.dto.PairDTO;
 import pairmatching.controller.dto.StepDTO;
 import pairmatching.model.constants.ErrorMessage;
-import pairmatching.model.domain.Crew;
 import pairmatching.model.domain.PairGroup;
 import pairmatching.model.domain.PairGroupRepository;
 import pairmatching.model.domain.PairMatcher;
@@ -23,14 +22,14 @@ public class PairService {
         }
         return pairGroup.getPairs()
                 .stream()
-                .map(pair -> new PairDTO(pair.getAllCrewNames()))
+                .map(pair -> new PairDTO(pair.getMatchedCrewNames()))
                 .collect(Collectors.toList());
     }
 
-    public void match(StepDTO stepDTO, List<Crew> crews) {
+    public void match(StepDTO stepDTO, List<String> crewNames) {
         Step step = Step.toStep(stepDTO);
         List<PairGroup> sameCourseLevelPairs = PairGroupRepository.findByCourseLevel(step.getCourse(), step.getLevel());
-        PairMatcher pairMatcher = new PairMatcher(crews, sameCourseLevelPairs);
+        PairMatcher pairMatcher = new PairMatcher(crewNames, sameCourseLevelPairs);
         PairGroup pairGroup = pairMatcher.match();
         PairGroupRepository.add(step, pairGroup);
     }

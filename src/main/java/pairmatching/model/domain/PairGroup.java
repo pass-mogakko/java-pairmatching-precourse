@@ -10,9 +10,9 @@ public class PairGroup {
         this.pairs = pairs;
     }
 
-    public boolean hasAlreadyMatched(Crew crew1, Crew crew2) {
+    public boolean hasAlreadyMatched(String firstCrew, String secondCrew) {
         return pairs.stream()
-                .anyMatch(pair -> pair.containsCrews(crew1, crew2));
+                .anyMatch(pair -> pair.containsCrews(firstCrew, secondCrew));
     }
 
     public List<Pair> getPairs() {

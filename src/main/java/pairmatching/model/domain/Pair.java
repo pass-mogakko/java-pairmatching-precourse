@@ -2,37 +2,30 @@ package pairmatching.model.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Pair {
-    private final List<Crew> matchedCrews;
+    private final List<String> matchedCrewNames;
 
-    public Pair(List<Crew> matchedCrews) {
-        this.matchedCrews = matchedCrews;
+    public Pair(List<String> matchedCrewNames) {
+        this.matchedCrewNames = matchedCrewNames;
     }
 
-    public boolean containsCrews(Crew crew1, Crew crew2) {
-        return matchedCrews.contains(crew1) && matchedCrews.contains(crew2);
+    public boolean containsCrews(String firstCrewName, String secondCrewName) {
+        return matchedCrewNames.contains(firstCrewName) && matchedCrewNames.contains(secondCrewName);
     }
 
-    public List<Crew> getMatchedCrews() {
-        return Collections.unmodifiableList(matchedCrews);
+    public List<String> getMatchedCrewNames() {
+        return Collections.unmodifiableList(matchedCrewNames);
     }
 
-    public List<String> getAllCrewNames() {
-        return matchedCrews.stream()
-                .map(Crew::getName)
-                .collect(Collectors.toList());
-    }
-
-    public void addCrew(Crew crew) {
-        matchedCrews.add(crew);
+    public void addCrew(String crewName) {
+        matchedCrewNames.add(crewName);
     }
 
     @Override
     public String toString() {
         return "Pair{" +
-                "matchedCrews=" + matchedCrews +
+                "matchedCrews=" + matchedCrewNames +
                 '}';
     }
 }

@@ -5,7 +5,6 @@ import pairmatching.controller.dto.PairDTO;
 import pairmatching.controller.dto.StepDTO;
 import pairmatching.model.CrewService;
 import pairmatching.model.PairService;
-import pairmatching.model.domain.Crew;
 import pairmatching.view.ActionCommand;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -20,8 +19,8 @@ public class PairController {
         if (pairService.hasMatched(stepDTO) && !toRematch()) {
             return;
         }
-        List<Crew> crews = crewService.findAllCrewsByCourse(stepDTO.getCourse());
-        pairService.match(stepDTO, crews);
+        List<String> crewNames = crewService.findAllCrewNamesByCourse(stepDTO.getCourse());
+        pairService.match(stepDTO, crewNames);
         List<PairDTO> pairResult = pairService.readPairGroup(stepDTO);
         OutputView.printPairResult(pairResult);
     }

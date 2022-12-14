@@ -8,14 +8,14 @@ import java.util.Stack;
 import pairmatching.model.constants.ErrorMessage;
 
 public class PairMatcher {
-    private final List<Crew> crews;
+    private final List<String> crewNames;
     private final List<PairGroup> sameCourseLevelPairs;
 
-    public PairMatcher(List<Crew> crews, List<PairGroup> sameCourseLevelPairs) {
-        if (crews.size() < 2) {
+    public PairMatcher(List<String> crewNames, List<PairGroup> sameCourseLevelPairs) {
+        if (crewNames.size() < 2) {
             throw new IllegalArgumentException(ErrorMessage.CREW_TO_MATCH_INSUFFICIENT);
         }
-        this.crews = crews;
+        this.crewNames = crewNames;
         this.sameCourseLevelPairs = sameCourseLevelPairs;
     }
 
@@ -38,13 +38,13 @@ public class PairMatcher {
     }
 
     private boolean isImpossibleToMatch() {
-        return crews.stream()
+        return crewNames.stream()
                 .anyMatch(this::isCrewUnMatchable);
     }
 
-    private boolean isCrewUnMatchable(Crew crew) {
-        return crews.stream()
-                .allMatch(secondCrew -> areMatchedCrews(crew, secondCrew));
+    private boolean isCrewUnMatchable(String crewName) {
+        return crewNames.stream()
+                .allMatch(secondCrewName -> areMatchedCrews(crewName, secondCrewName));
     }
 
     private void validateTrialCount(int trialCount) {
@@ -54,9 +54,9 @@ public class PairMatcher {
     }
 
     private List<Pair> makePairs() {
-        Stack<Crew> crewsToMatch = shuffle(crews);
+        Stack<String> crewsToMatch = shuffle(crewNames);
         List<Pair> pairs = new ArrayList<>();
-        while (crewsToMatch.size() > 2) {
+        while (crewsToMatch.size() > 1) {
             Pair matchedPair = matchCrew(crewsToMatch.pop(), crewsToMatch.pop());
             if (matchedPair == null) {
                 return null;
@@ -70,23 +70,23 @@ public class PairMatcher {
         return pairs;
     }
 
-    private Stack<Crew> shuffle(List<Crew> crews) {
-        List<Crew> shuffledCrew = Randoms.shuffle(crews);
+    private Stack<String> shuffle(List<String> crewNames) {
+        List<String> shuffledCrew = Randoms.shuffle(crewNames);
         Collections.reverse(shuffledCrew);
-        Stack<Crew> crewsToMatch = new Stack<>();
+        Stack<String> crewsToMatch = new Stack<>();
         crewsToMatch.addAll(shuffledCrew);
         return crewsToMatch;
     }
 
-    private Pair matchCrew(Crew firstCrew, Crew secondCrew) {
-        if (areMatchedCrews(firstCrew, secondCrew)) {
+    private Pair matchCrew(String firstCrewName, String secondCrewName) {
+        if (areMatchedCrews(firstCrewName, secondCrewName)) {
             return null;
         }
-        return new Pair(List.of(firstCrew, secondCrew));
+        return new Pair(List.of(firstCrewName, secondCrewName));
     }
 
-    private boolean areMatchedCrews(Crew crew1, Crew crew2) {
+    private boolean areMatchedCrews(String firstCrewName, String secondCrewName) {
         return sameCourseLevelPairs.stream()
-                .anyMatch(pairGroup -> pairGroup.hasAlreadyMatched(crew1, crew2));
+                .anyMatch(pairGroup -> pairGroup.hasAlreadyMatched(firstCrewName, secondCrewName));
     }
 }
