@@ -8,17 +8,15 @@ import java.util.Stack;
 import pairmatching.model.constants.ErrorMessage;
 
 public class PairMatcher {
-    private final Step step;
-    private final List<PairGroup> sameCourseLevelPairs;
     private final List<Crew> crews;
+    private final List<PairGroup> sameCourseLevelPairs;
 
-    public PairMatcher(Step step, List<Crew> crews) {
+    public PairMatcher(List<Crew> crews, List<PairGroup> sameCourseLevelPairs) {
         if (crews.size() < 2) {
             throw new IllegalArgumentException(ErrorMessage.CREW_TO_MATCH_INSUFFICIENT);
         }
-        this.step = step;
         this.crews = crews;
-        this.sameCourseLevelPairs = PairGroupRepository.findByCourseLevel(step.getCourse(), step.getLevel());
+        this.sameCourseLevelPairs = sameCourseLevelPairs;
     }
 
     public PairGroup match() {
@@ -30,7 +28,7 @@ public class PairMatcher {
             validateTrialCount(trialCount);
             pairs = makePairs();
         }
-        return new PairGroup(step, pairs);
+        return new PairGroup(pairs);
     }
 
     private void validateMatchCases() {

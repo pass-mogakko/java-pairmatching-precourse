@@ -28,9 +28,11 @@ public class PairService {
     }
 
     public void match(StepDTO stepDTO, List<Crew> crews) {
-        PairMatcher pairMatcher = new PairMatcher(Step.toStep(stepDTO), crews);
+        Step step = Step.toStep(stepDTO);
+        List<PairGroup> sameCourseLevelPairs = PairGroupRepository.findByCourseLevel(step.getCourse(), step.getLevel());
+        PairMatcher pairMatcher = new PairMatcher(crews, sameCourseLevelPairs);
         PairGroup pairGroup = pairMatcher.match();
-        PairGroupRepository.add(pairGroup);
+        PairGroupRepository.add(step, pairGroup);
     }
 
     public void reset() {

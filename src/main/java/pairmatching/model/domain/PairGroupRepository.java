@@ -1,32 +1,26 @@
 package pairmatching.model.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PairGroupRepository {
-    private static final Set<PairGroup> pairGroups = new HashSet<>();
+    private static final Map<Step, PairGroup> pairGroups = new HashMap<>();
 
-    public static Set<PairGroup> pairGroups() {
-        return Collections.unmodifiableSet(pairGroups);
+    public static void add(Step step, PairGroup pairGroup) {
+        pairGroups.put(step, pairGroup);
     }
 
-    public static void add(PairGroup pairGroup) {
-        pairGroups.add(pairGroup);
-    }
-
-    public static PairGroup findByStep(Step findStep) {
-        return pairGroups.stream()
-                .filter(pairGroup -> pairGroup.hasSameStep(findStep))
-                .findFirst()
-                .orElse(null);
+    public static PairGroup findByStep(Step step) {
+        return pairGroups.get(step);
     }
 
     public static List<PairGroup> findByCourseLevel(Course course, Level level) {
-        return pairGroups.stream()
-                .filter(pairGroup -> pairGroup.hasSameCourseLevel(course, level))
+        return pairGroups.keySet()
+                .stream()
+                .filter(step -> step.isSameCourseLevel(course, level))
+                .map(pairGroups::get)
                 .collect(Collectors.toList());
     }
 
